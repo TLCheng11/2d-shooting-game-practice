@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Game from "../objects/Game";
 import css from "../styles/MainScreen.module.css";
 import { IGame } from "../types/Interfaces";
@@ -18,6 +18,21 @@ function MainScreen() {
       setGame(new Game(canvasRef.current.width, canvasRef.current.height));
     }
   }, []);
+
+  useEffect(() => {
+    if (game && ctx) {
+      animate();
+    }
+  }, [game, ctx]);
+
+  /** an endless loop to refresh the canvas */
+  function animate() {
+    game?.update();
+    if (ctx) {
+      game?.draw(ctx);
+      requestAnimationFrame(animate);
+    }
+  }
 
   return (
     <div>

@@ -15,7 +15,7 @@ export default class Player implements IPlayer {
     this.height = 190;
     this.x = 20;
     this.y = 100;
-    this.speedY = 0;
+    this.speedY = 0.2;
     this.maxSpeed = 2;
   }
 
@@ -32,6 +32,7 @@ export default class Player implements IPlayer {
     }
 
     this.y += this.speedY;
+    console.log(this.y);
   }
 
   draw(context: CanvasRenderingContext2D) {

@@ -15,15 +15,14 @@ export default class Player implements IPlayer {
     this.height = 190;
     this.x = 20;
     this.y = 100;
-    this.speedY = 0.2;
+    this.speedY = 1;
     this.maxSpeed = 2;
   }
 
   update() {
     if (this.game.keys.has("ArrowUp") && this.game.keys.has("ArrowDown")) {
       this.speedY = 0;
-    }
-    if (this.game.keys.has("ArrowUp")) {
+    } else if (this.game.keys.has("ArrowUp")) {
       this.speedY = -this.maxSpeed;
     } else if (this.game.keys.has("ArrowDown")) {
       this.speedY = this.maxSpeed;
@@ -32,7 +31,6 @@ export default class Player implements IPlayer {
     }
 
     this.y += this.speedY;
-    console.log(this.y);
   }
 
   draw(context: CanvasRenderingContext2D) {

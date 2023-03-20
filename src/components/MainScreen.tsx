@@ -28,7 +28,9 @@ function MainScreen() {
   /** an endless loop to refresh the canvas */
   function animate() {
     game?.update();
-    if (ctx) {
+    if (canvasRef.current && ctx) {
+      // clear canvas before each loop
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       game?.draw(ctx);
       requestAnimationFrame(animate);
     }

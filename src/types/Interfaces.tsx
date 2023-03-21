@@ -41,3 +41,11 @@ export interface IProjectile {
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }
+
+export interface IUI {
+  game: IGame;
+  fontSize: number;
+  fontFamily: string;
+  color: string;
+  draw(context: CanvasRenderingContext2D): void;
+}

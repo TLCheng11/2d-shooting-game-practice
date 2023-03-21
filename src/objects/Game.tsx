@@ -1,12 +1,14 @@
-import { IGame, IInputHandler, IPlayer } from "../types/Interfaces";
+import { IGame, IInputHandler, IPlayer, IUI } from "../types/Interfaces";
 import InputHandler from "./InputHandler";
 import Player from "./Player";
+import UI from "./UI";
 
 export default class Game implements IGame {
   width: number;
   height: number;
   player: IPlayer;
   input: IInputHandler;
+  ui: IUI;
   keys: Set<string>;
 
   constructor(width: number, height: number) {
@@ -16,6 +18,7 @@ export default class Game implements IGame {
     // create all related classes
     this.player = new Player(this);
     this.input = new InputHandler(this);
+    this.ui = new UI(this);
 
     // keys array to hold all key input queue
     this.keys = new Set();
@@ -28,5 +31,6 @@ export default class Game implements IGame {
 
   draw(context: CanvasRenderingContext2D): void {
     this.player.draw(context);
+    this.ui.draw(context);
   }
 }

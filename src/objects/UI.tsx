@@ -29,6 +29,10 @@ export default class UI implements IUI {
     for (let i = 0; i < this.game.player.ammo; i++) {
       context.fillRect(20 + i * 5, 50, 3, 20);
     }
+
+    // timer
+    const formattedTime = this.game.gameTime * 0.001;
+    context.fillText("Timer: " + formattedTime.toFixed(2).toString(), 20, 100);
     context.restore();
 
     // gameover message

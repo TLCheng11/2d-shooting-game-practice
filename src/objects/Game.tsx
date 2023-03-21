@@ -24,6 +24,8 @@ export default class Game implements IGame {
   enemyInterval: number;
   score: number;
   winningScore: number;
+  gameTime: number;
+  timeLimit: number;
 
   constructor(width: number, height: number) {
     this.isGameOver = false;
@@ -46,38 +48,52 @@ export default class Game implements IGame {
     // init score
     this.score = 0;
     this.winningScore = 10;
+
+    // init Game time limit
+    this.gameTime = 0;
+    this.timeLimit = 20000;
   }
 
   update(deltaTime: number): void {
-    this.player.update();
-    this.player.addAmmo(deltaTime);
+    if (this.gameTime >= this.timeLimit) {
+      this.isGameOver = true;
+    }
 
-    // handle enemies
-    this.enemies.forEach((enemy) => {
-      enemy.update();
+    if (!this.isGameOver) {
+      // increment game time each frame
+      this.gameTime += deltaTime;
 
-      // check collision
-      if (this.checkCollision(this.player, enemy)) {
-        enemy.markedForDeletion = true;
-      }
+      // update player
+      this.player.update();
+      this.player.addAmmo(deltaTime);
 
-      // check projectile hit
-      this.player.projectiles.forEach((projectile) => {
-        if (this.checkCollision(projectile, enemy)) {
-          enemy.lives--;
-          if (enemy.lives <= 0) {
-            enemy.markedForDeletion = true;
-            this.score += enemy.score;
-            if (this.score >= this.winningScore) {
-              this.isGameOver = true;
-            }
-          }
-          projectile.markedForDeletion = true;
+      // handle enemies
+      this.enemies.forEach((enemy) => {
+        enemy.update();
+
+        // check collision
+        if (this.checkCollision(this.player, enemy)) {
+          enemy.markedForDeletion = true;
         }
+
+        // check projectile hit
+        this.player.projectiles.forEach((projectile) => {
+          if (this.checkCollision(projectile, enemy)) {
+            enemy.lives--;
+            if (enemy.lives <= 0) {
+              enemy.markedForDeletion = true;
+              this.score += enemy.score;
+              if (this.score >= this.winningScore) {
+                this.isGameOver = true;
+              }
+            }
+            projectile.markedForDeletion = true;
+          }
+        });
       });
-    });
-    this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
-    this.addEnemy(deltaTime);
+      this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
+      this.addEnemy(deltaTime);
+    }
   }
 
   draw(context: CanvasRenderingContext2D): void {

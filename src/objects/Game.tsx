@@ -21,8 +21,9 @@ export default class Game implements IGame {
     this.keys = new Set();
   }
 
-  update(): void {
+  update(deltaTime: number): void {
     this.player.update();
+    this.player.addAmmo(deltaTime);
   }
 
   draw(context: CanvasRenderingContext2D): void {

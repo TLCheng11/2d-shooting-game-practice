@@ -12,6 +12,8 @@ export default class Player implements IPlayer {
   projectiles: IProjectile[];
   ammo: number;
   maxAmmo: number;
+  ammoTimer: number;
+  ammoRefreshTime: number;
 
   constructor(game: IGame) {
     this.game = game;
@@ -21,10 +23,13 @@ export default class Player implements IPlayer {
     this.y = 100;
     this.speedY = 0;
     this.maxSpeed = 2;
-    // to hold projectile objects
+
+    // to hold projectile objects and count ammo
     this.projectiles = [];
     this.ammo = 20;
     this.maxAmmo = 50;
+    this.ammoTimer = 0;
+    this.ammoRefreshTime = 500;
   }
 
   update(): void {
@@ -65,6 +70,15 @@ export default class Player implements IPlayer {
         new Projectile(this.game, this.x + 80, this.y + 30)
       );
       this.ammo--;
+    }
+  }
+
+  addAmmo(deltaTime: number): void {
+    if (this.ammo < this.maxAmmo && this.ammoTimer < this.ammoRefreshTime) {
+      this.ammoTimer += deltaTime;
+    } else {
+      this.ammo++;
+      this.ammoTimer = 0;
     }
   }
 }

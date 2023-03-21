@@ -3,7 +3,7 @@ export interface IGame {
   height: number;
   player: IPlayer;
   keys: Set<string>;
-  update(): void;
+  update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
 }
 
@@ -22,9 +22,12 @@ export interface IPlayer {
   projectiles: IProjectile[];
   ammo: number;
   maxAmmo: number;
+  ammoTimer: number;
+  ammoRefreshTime: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
   shootTop(): void;
+  addAmmo(deltaTime: number): void;
 }
 
 export interface IProjectile {

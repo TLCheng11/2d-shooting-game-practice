@@ -30,5 +30,20 @@ export default class UI implements IUI {
       context.fillRect(20 + i * 5, 50, 3, 20);
     }
     context.restore();
+
+    // gameover message
+    if (this.game.isGameOver) {
+      context.textAlign = "center";
+      let message: string;
+      if (this.game.score >= this.game.winningScore) {
+        message = "You Won!";
+        context.fillStyle = "green";
+      } else {
+        message = "You Lose.";
+        context.fillStyle = "red";
+      }
+      context.font = "50px " + this.fontFamily;
+      context.fillText(message, this.game.width * 0.5, this.game.height * 0.5);
+    }
   }
 }

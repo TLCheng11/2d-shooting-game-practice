@@ -22,6 +22,7 @@ export interface IGame {
   enemyTimer: number;
   enemyInterval: number;
   score: number;
+  winningScore: number;
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;

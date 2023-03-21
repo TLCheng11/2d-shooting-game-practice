@@ -3,6 +3,7 @@ import {
   IGame,
   IInputHandler,
   IPlayer,
+  IProjectile,
   IUI,
 } from "../types/Interfaces";
 import { Angler1 } from "./Enemy";
@@ -46,7 +47,18 @@ export default class Game implements IGame {
     this.player.addAmmo(deltaTime);
 
     // handle enemies
-    this.enemies.forEach((enemy) => enemy.update());
+    this.enemies.forEach((enemy) => {
+      enemy.update();
+      if (this.checkCollision(this.player, enemy)) {
+        enemy.markedForDeletion = true;
+      }
+      this.player.projectiles.forEach((projectile) => {
+        if (this.checkCollision(projectile, enemy)) {
+          enemy.markedForDeletion = true;
+          projectile.markedForDeletion = true;
+        }
+      });
+    });
     this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
     this.addEnemy(deltaTime);
   }
@@ -64,5 +76,14 @@ export default class Game implements IGame {
     } else {
       this.enemyTimer += deltaTime;
     }
+  }
+
+  checkCollision(rect1: IPlayer | IProjectile, rect2: IEnemy): boolean {
+    return (
+      rect1.x < rect2.x + rect2.width &&
+      rect1.x + rect1.width > rect2.x &&
+      rect1.y < rect2.y + rect2.height &&
+      rect1.y + rect1.height > rect2.y
+    );
   }
 }

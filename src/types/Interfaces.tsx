@@ -22,6 +22,7 @@ export interface IGame {
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;
+  checkCollision(rect1: IPlayer | IProjectile, rect2: IEnemy): boolean;
 }
 
 export interface IInputHandler {

@@ -1,3 +1,15 @@
+export interface IEnemy {
+  game: IGame;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  speedX: number;
+  markedForDeletion: boolean;
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
+}
+
 export interface IGame {
   width: number;
   height: number;

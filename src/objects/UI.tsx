@@ -14,6 +14,7 @@ export default class UI implements IUI {
   }
 
   draw(context: CanvasRenderingContext2D): void {
+    // ui to show ammo amount
     context.fillStyle = this.color;
     for (let i = 0; i < this.game.player.ammo; i++) {
       context.fillRect(20 + i * 5, 50, 3, 20);

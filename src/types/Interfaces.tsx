@@ -6,6 +6,8 @@ export interface IEnemy {
   height: number;
   speedX: number;
   markedForDeletion: boolean;
+  lives: number;
+  score: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }
@@ -19,6 +21,7 @@ export interface IGame {
   enemies: IEnemy[];
   enemyTimer: number;
   enemyInterval: number;
+  score: number;
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;

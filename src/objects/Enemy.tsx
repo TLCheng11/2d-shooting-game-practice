@@ -8,10 +8,12 @@ export default class Enemy implements IEnemy {
   height: number;
   speedX: number;
   markedForDeletion: boolean;
+  lives: number;
+  score: number;
 
   constructor(game: IGame) {
     // set default value
-    this.y = this.width = this.height = 0;
+    this.y = this.width = this.height = this.lives = this.score = 0;
 
     this.game = game;
     // enemy come out from right edge
@@ -31,6 +33,9 @@ export default class Enemy implements IEnemy {
   draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "red";
     context.fillRect(this.x, this.y, this.width, this.height);
+    context.fillStyle = "black";
+    context.font = "20px Helvetica";
+    context.fillText(String(this.lives), this.x, this.y);
   }
 }
 
@@ -40,5 +45,7 @@ export class Angler1 extends Enemy {
     this.width = 228 * 0.2;
     this.height = 169 * 0.2;
     this.y = Math.random() * (this.game.height * 0.9 - this.height);
+    this.lives = 2;
+    this.score = 2;
   }
 }

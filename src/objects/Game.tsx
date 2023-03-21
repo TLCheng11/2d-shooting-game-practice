@@ -22,6 +22,7 @@ export default class Game implements IGame {
   enemies: IEnemy[];
   enemyTimer: number;
   enemyInterval: number;
+  score: number;
 
   constructor(width: number, height: number) {
     this.isGameOver = false;
@@ -40,6 +41,9 @@ export default class Game implements IGame {
     this.enemies = [];
     this.enemyTimer = 0;
     this.enemyInterval = 1000;
+
+    // init score
+    this.score = 0;
   }
 
   update(deltaTime: number): void {
@@ -49,12 +53,20 @@ export default class Game implements IGame {
     // handle enemies
     this.enemies.forEach((enemy) => {
       enemy.update();
+
+      // check collision
       if (this.checkCollision(this.player, enemy)) {
         enemy.markedForDeletion = true;
       }
+
+      // check projectile hit
       this.player.projectiles.forEach((projectile) => {
         if (this.checkCollision(projectile, enemy)) {
-          enemy.markedForDeletion = true;
+          enemy.lives--;
+          if (enemy.lives <= 0) {
+            enemy.markedForDeletion = true;
+            this.score++;
+          }
           projectile.markedForDeletion = true;
         }
       });

@@ -23,6 +23,7 @@ export default class Game implements IGame {
   enemyTimer: number;
   enemyInterval: number;
   score: number;
+  winningScore: number;
 
   constructor(width: number, height: number) {
     this.isGameOver = false;
@@ -44,6 +45,7 @@ export default class Game implements IGame {
 
     // init score
     this.score = 0;
+    this.winningScore = 10;
   }
 
   update(deltaTime: number): void {
@@ -65,7 +67,10 @@ export default class Game implements IGame {
           enemy.lives--;
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true;
-            this.score++;
+            this.score += enemy.score;
+            if (this.score >= this.winningScore) {
+              this.isGameOver = true;
+            }
           }
           projectile.markedForDeletion = true;
         }

@@ -35,7 +35,7 @@ export default class Enemy implements IEnemy {
     context.fillRect(this.x, this.y, this.width, this.height);
     context.fillStyle = "black";
     context.font = "20px Helvetica";
-    context.fillText(String(this.lives), this.x, this.y);
+    context.fillText(this.lives.toString(), this.x, this.y);
   }
 }
 

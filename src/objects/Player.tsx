@@ -9,17 +9,17 @@ export default class Player implements IPlayer {
   speedY: number;
   maxSpeed: number;
 
-  constructor(game: any) {
+  constructor(game: IGame) {
     this.game = game;
     this.width = 120;
     this.height = 190;
     this.x = 20;
     this.y = 100;
-    this.speedY = 1;
+    this.speedY = 0;
     this.maxSpeed = 2;
   }
 
-  update() {
+  update(): void {
     if (this.game.keys.has("ArrowUp") && this.game.keys.has("ArrowDown")) {
       this.speedY = 0;
     } else if (this.game.keys.has("ArrowUp")) {
@@ -33,7 +33,7 @@ export default class Player implements IPlayer {
     this.y += this.speedY;
   }
 
-  draw(context: CanvasRenderingContext2D) {
+  draw(context: CanvasRenderingContext2D): void {
     context.fillRect(this.x, this.y, this.width, this.height);
   }
 }

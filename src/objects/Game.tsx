@@ -21,11 +21,11 @@ export default class Game implements IGame {
     this.keys = new Set();
   }
 
-  update() {
+  update(): void {
     this.player.update();
   }
 
-  draw(context: CanvasRenderingContext2D) {
+  draw(context: CanvasRenderingContext2D): void {
     this.player.draw(context);
   }
 }

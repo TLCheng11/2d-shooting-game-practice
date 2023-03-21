@@ -22,3 +22,15 @@ export interface IPlayer {
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }
+
+export interface IProjectile {
+  game: IGame;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  speed: number;
+  markedForDeletion: boolean;
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
+}

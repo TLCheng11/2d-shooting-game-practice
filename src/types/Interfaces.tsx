@@ -19,8 +19,12 @@ export interface IPlayer {
   y: number;
   speedY: number;
   maxSpeed: number;
+  projectiles: IProjectile[];
+  ammo: number;
+  maxAmmo: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
+  shootTop(): void;
 }
 
 export interface IProjectile {

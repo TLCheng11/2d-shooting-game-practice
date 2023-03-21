@@ -13,7 +13,8 @@ export default class InputHandler {
         !this.game.keys.has(e.key)
       ) {
         this.game.keys.add(e.key);
-        console.log(this.game.keys);
+      } else if (e.key === " ") {
+        this.game.player.shootTop();
       }
     });
 
@@ -21,7 +22,6 @@ export default class InputHandler {
     window.addEventListener("keyup", (e) => {
       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
         this.game.keys.delete(e.key);
-        console.log(this.game.keys);
       }
     });
   }

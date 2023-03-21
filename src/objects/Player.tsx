@@ -1,4 +1,5 @@
-import { IGame, IPlayer } from "../types/Interfaces";
+import { IGame, IPlayer, IProjectile } from "../types/Interfaces";
+import Projectile from "./Projectile";
 
 export default class Player implements IPlayer {
   game: IGame;
@@ -8,6 +9,9 @@ export default class Player implements IPlayer {
   y: number;
   speedY: number;
   maxSpeed: number;
+  projectiles: IProjectile[];
+  ammo: number;
+  maxAmmo: number;
 
   constructor(game: IGame) {
     this.game = game;
@@ -17,6 +21,10 @@ export default class Player implements IPlayer {
     this.y = 100;
     this.speedY = 0;
     this.maxSpeed = 2;
+    // to hold projectile objects
+    this.projectiles = [];
+    this.ammo = 20;
+    this.maxAmmo = 50;
   }
 
   update(): void {
@@ -31,9 +39,32 @@ export default class Player implements IPlayer {
     }
 
     this.y += this.speedY;
+
+    // update projectiles
+    this.projectiles.forEach((projectile) => {
+      projectile.update();
+    });
+    this.projectiles = this.projectiles.filter(
+      (projectile) => !projectile.markedForDeletion
+    );
   }
 
   draw(context: CanvasRenderingContext2D): void {
+    context.fillStyle = "black";
     context.fillRect(this.x, this.y, this.width, this.height);
+
+    // draw projectiles
+    this.projectiles.forEach((projectile) => {
+      projectile.draw(context);
+    });
+  }
+
+  shootTop(): void {
+    if (this.ammo > 0) {
+      this.projectiles.push(
+        new Projectile(this.game, this.x + 80, this.y + 30)
+      );
+      this.ammo--;
+    }
   }
 }

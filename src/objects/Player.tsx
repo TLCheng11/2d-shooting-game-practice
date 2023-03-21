@@ -27,7 +27,7 @@ export default class Player implements IPlayer {
     // to hold projectile objects and count ammo
     this.projectiles = [];
     this.ammo = 20;
-    this.maxAmmo = 30;
+    this.maxAmmo = 50;
     this.ammoTimer = 0;
     this.ammoRefreshTime = 500;
   }
@@ -74,11 +74,12 @@ export default class Player implements IPlayer {
   }
 
   addAmmo(deltaTime: number): void {
-    if (this.ammo < this.maxAmmo && this.ammoTimer < this.ammoRefreshTime) {
-      this.ammoTimer += deltaTime;
-    } else {
-      this.ammo++;
-      this.ammoTimer = 0;
-    }
+    if (this.ammo < this.maxAmmo)
+      if (this.ammoTimer < this.ammoRefreshTime) {
+        this.ammoTimer += deltaTime;
+      } else {
+        this.ammo++;
+        this.ammoTimer = 0;
+      }
   }
 }

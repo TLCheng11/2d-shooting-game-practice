@@ -11,12 +11,17 @@ export interface IEnemy {
 }
 
 export interface IGame {
+  isGameOver: boolean;
   width: number;
   height: number;
   player: IPlayer;
   keys: Set<string>;
+  enemies: IEnemy[];
+  enemyTimer: number;
+  enemyInterval: number;
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
+  addEnemy(deltaTime: number): void;
 }
 
 export interface IInputHandler {

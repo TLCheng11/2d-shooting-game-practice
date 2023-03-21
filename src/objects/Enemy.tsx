@@ -37,8 +37,8 @@ export default class Enemy implements IEnemy {
 export class Angler1 extends Enemy {
   constructor(game: IGame) {
     super(game);
-    this.width = 228;
-    this.height = 169;
+    this.width = 228 * 0.2;
+    this.height = 169 * 0.2;
     this.y = Math.random() * (this.game.height * 0.9 - this.height);
   }
 }

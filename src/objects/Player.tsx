@@ -27,7 +27,7 @@ export default class Player implements IPlayer {
     // to hold projectile objects and count ammo
     this.projectiles = [];
     this.ammo = 20;
-    this.maxAmmo = 50;
+    this.maxAmmo = 30;
     this.ammoTimer = 0;
     this.ammoRefreshTime = 500;
   }

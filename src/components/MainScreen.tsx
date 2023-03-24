@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Game from "../objects/Game";
 import css from "../styles/MainScreen.module.css";
 import { IGame } from "../types/Interfaces";
+import GameBackground from "./GameBackground";
 
 function MainScreen() {
   const [game, setGame] = useState<IGame>();
@@ -48,6 +49,7 @@ function MainScreen() {
   return (
     <div>
       <canvas id={css.canvas1} ref={canvasRef}></canvas>
+      <GameBackground />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { time } from "console";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Game from "../objects/Game";
 import css from "../styles/MainScreen.module.css";

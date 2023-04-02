@@ -25,6 +25,7 @@ export interface IGame {
   winningScore: number;
   gameTime: number;
   timeLimit: number;
+  speed: number;
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;
@@ -33,6 +34,18 @@ export interface IGame {
 
 export interface IInputHandler {
   game: IGame;
+}
+
+export interface ILayer {
+  game: IGame;
+  image: CanvasImageSource;
+  speedModifier: number;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  update(deltaTime: number): void;
+  draw(context: CanvasRenderingContext2D): void;
 }
 
 export interface IPlayer {

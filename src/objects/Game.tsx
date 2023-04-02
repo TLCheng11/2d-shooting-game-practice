@@ -26,6 +26,7 @@ export default class Game implements IGame {
   winningScore: number;
   gameTime: number;
   timeLimit: number;
+  speed: number;
 
   constructor(width: number, height: number) {
     this.isGameOver = false;
@@ -52,6 +53,7 @@ export default class Game implements IGame {
     // init Game time limit
     this.gameTime = 0;
     this.timeLimit = 20000;
+    this.speed = 1;
   }
 
   update(deltaTime: number): void {

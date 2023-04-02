@@ -21,10 +21,10 @@ export default class Background implements IBackground {
     this.image3 = backgroundRef[2].current;
     this.image4 = backgroundRef[3].current;
     this.layer1 = new Layer(this.game, this.image1, 1);
-    this.layer2 = new Layer(this.game, this.image2, 1);
-    this.layer3 = new Layer(this.game, this.image3, 1);
-    this.layer4 = new Layer(this.game, this.image4, 1);
-    this.layers = [this.layer1];
+    this.layer2 = new Layer(this.game, this.image2, 2);
+    this.layer3 = new Layer(this.game, this.image3, 2);
+    this.layer4 = new Layer(this.game, this.image4, 4);
+    this.layers = [this.layer1, this.layer2, this.layer3];
   }
 
   update(): void {

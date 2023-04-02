@@ -70,10 +70,12 @@ export default class Game implements IGame {
       this.isGameOver = true;
     }
 
-    // update background
-    this.background.update();
-
     if (!this.isGameOver) {
+      // update background
+      // update last layer separately to put it on top
+      this.background.update();
+      this.background.layer4.update();
+
       // increment game time each frame
       this.gameTime += deltaTime;
 
@@ -115,6 +117,8 @@ export default class Game implements IGame {
     this.player.draw(context);
     this.enemies.forEach((enemy) => enemy.draw(context));
     this.ui.draw(context);
+    // draw layer 4 on top
+    this.background.layer4.draw(context);
   }
 
   addEnemy(deltaTime: number): void {

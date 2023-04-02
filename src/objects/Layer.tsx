@@ -29,5 +29,6 @@ export default class Layer implements ILayer {
 
   draw(context: CanvasRenderingContext2D): void {
     context.drawImage(this.image, this.x, this.y);
+    context.drawImage(this.image, this.x + this.width, this.y);
   }
 }

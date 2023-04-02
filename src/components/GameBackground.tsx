@@ -13,25 +13,25 @@ function GameBackground({ backgroundRef }: IGameBackgroundProp) {
   return (
     <div>
       <img
-        id={css.layer1}
+        id="layer1"
         ref={backgroundImage1Ref}
         src="./assets/background/layer1.png"
         alt="layer1"
       />
       <img
-        id={css.layer2}
+        id="layer2"
         ref={backgroundImage2Ref}
         src="./assets/background/layer2.png"
         alt="layer2"
       />
       <img
-        id={css.layer3}
+        id="layer3"
         ref={backgroundImage3Ref}
         src="./assets/background/layer3.png"
         alt="layer3"
       />
       <img
-        id={css.layer4}
+        id="layer4"
         ref={backgroundImage4Ref}
         src="./assets/background/layer4.png"
         alt="layer4"

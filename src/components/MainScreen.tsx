@@ -10,24 +10,24 @@ function MainScreen() {
 
   const currentTime = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const image1Ref = useRef<HTMLImageElement>(null);
-  const image2Ref = useRef<HTMLImageElement>(null);
-  const image3Ref = useRef<HTMLImageElement>(null);
-  const image4Ref = useRef<HTMLImageElement>(null);
+  const backgroundImage1Ref = useRef<HTMLImageElement>(null);
+  const backgroundImage2Ref = useRef<HTMLImageElement>(null);
+  const backgroundImage3Ref = useRef<HTMLImageElement>(null);
+  const backgroundImage4Ref = useRef<HTMLImageElement>(null);
 
   useLayoutEffect(() => {
     if (canvasRef.current) {
       const c = canvasRef.current.getContext("2d");
       setCtx(c);
-      canvasRef.current.width = 500;
+      canvasRef.current.width = 1000;
       canvasRef.current.height = 500;
 
       setGame(
         new Game(canvasRef.current.width, canvasRef.current.height, [
-          image1Ref,
-          image2Ref,
-          image3Ref,
-          image4Ref,
+          backgroundImage1Ref,
+          backgroundImage2Ref,
+          backgroundImage3Ref,
+          backgroundImage4Ref,
         ])
       );
     }
@@ -60,7 +60,12 @@ function MainScreen() {
     <div>
       <canvas id={css.canvas1} ref={canvasRef}></canvas>
       <GameBackground
-        backgroundRef={[image1Ref, image2Ref, image3Ref, image4Ref]}
+        backgroundRef={[
+          backgroundImage1Ref,
+          backgroundImage2Ref,
+          backgroundImage3Ref,
+          backgroundImage4Ref,
+        ]}
       />
     </div>
   );

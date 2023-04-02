@@ -1,3 +1,18 @@
+export interface IBackground {
+  game: IGame;
+  image1: HTMLElement | null;
+  image2: HTMLElement | null;
+  image3: HTMLElement | null;
+  image4: HTMLElement | null;
+  layer1: ILayer;
+  layer2: ILayer;
+  layer3: ILayer;
+  layer4: ILayer;
+  layers: ILayer[];
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
+}
+
 export interface IEnemy {
   game: IGame;
   x: number;
@@ -38,13 +53,13 @@ export interface IInputHandler {
 
 export interface ILayer {
   game: IGame;
-  image: CanvasImageSource;
+  image: any;
   speedModifier: number;
   width: number;
   height: number;
   x: number;
   y: number;
-  update(deltaTime: number): void;
+  update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }
 

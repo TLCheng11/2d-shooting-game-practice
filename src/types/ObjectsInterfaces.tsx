@@ -32,6 +32,9 @@ export interface IGame {
   width: number;
   height: number;
   player: IPlayer;
+  input: IInputHandler;
+  ui: IUI;
+  background: IBackground;
   keys: Set<string>;
   enemies: IEnemy[];
   enemyTimer: number;

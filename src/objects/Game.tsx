@@ -1,11 +1,14 @@
+import { RefObject } from "react";
 import {
+  IBackground,
   IEnemy,
   IGame,
   IInputHandler,
   IPlayer,
   IProjectile,
   IUI,
-} from "../types/Interfaces";
+} from "../types/ObjectsInterfaces";
+import Background from "./Background";
 import { Angler1 } from "./Enemy";
 import InputHandler from "./InputHandler";
 import Player from "./Player";
@@ -18,6 +21,7 @@ export default class Game implements IGame {
   player: IPlayer;
   input: IInputHandler;
   ui: IUI;
+  background: IBackground;
   keys: Set<string>;
   enemies: IEnemy[];
   enemyTimer: number;
@@ -28,7 +32,11 @@ export default class Game implements IGame {
   timeLimit: number;
   speed: number;
 
-  constructor(width: number, height: number) {
+  constructor(
+    width: number,
+    height: number,
+    backgroundRef: RefObject<HTMLImageElement>[]
+  ) {
     this.isGameOver = false;
     this.width = width;
     this.height = height;
@@ -37,6 +45,7 @@ export default class Game implements IGame {
     this.player = new Player(this);
     this.input = new InputHandler(this);
     this.ui = new UI(this);
+    this.background = new Background(this, backgroundRef);
 
     // keys array to hold all key input queue
     this.keys = new Set();
@@ -60,6 +69,9 @@ export default class Game implements IGame {
     if (this.gameTime >= this.timeLimit) {
       this.isGameOver = true;
     }
+
+    // update background
+    this.background.update();
 
     if (!this.isGameOver) {
       // increment game time each frame
@@ -99,6 +111,7 @@ export default class Game implements IGame {
   }
 
   draw(context: CanvasRenderingContext2D): void {
+    this.background.draw(context);
     this.player.draw(context);
     this.enemies.forEach((enemy) => enemy.draw(context));
     this.ui.draw(context);

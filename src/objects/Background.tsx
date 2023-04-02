@@ -1,4 +1,5 @@
-import { IBackground, IGame, ILayer } from "../types/Interfaces";
+import { RefObject } from "react";
+import { IBackground, IGame, ILayer } from "../types/ObjectsInterfaces";
 import Layer from "./Layer";
 
 export default class Background implements IBackground {
@@ -13,12 +14,12 @@ export default class Background implements IBackground {
   layer4: ILayer;
   layers: ILayer[];
 
-  constructor(game: IGame) {
+  constructor(game: IGame, backgroundRef: RefObject<HTMLImageElement>[]) {
     this.game = game;
-    this.image1 = document.getElementById("layer1");
-    this.image2 = document.getElementById("layer2");
-    this.image3 = document.getElementById("layer3");
-    this.image4 = document.getElementById("layer4");
+    this.image1 = backgroundRef[0].current;
+    this.image2 = backgroundRef[1].current;
+    this.image3 = backgroundRef[2].current;
+    this.image4 = backgroundRef[3].current;
     this.layer1 = new Layer(this.game, this.image1, 1);
     this.layer2 = new Layer(this.game, this.image2, 1);
     this.layer3 = new Layer(this.game, this.image3, 1);

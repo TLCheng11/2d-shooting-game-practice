@@ -1,4 +1,4 @@
-import { IGame, IUI } from "../types/Interfaces";
+import { IGame, IUI } from "../types/ObjectsInterfaces";
 
 export default class UI implements IUI {
   game: IGame;

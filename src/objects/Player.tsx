@@ -1,4 +1,4 @@
-import { IGame, IPlayer, IProjectile } from "../types/Interfaces";
+import { IGame, IPlayer, IProjectile } from "../types/ObjectsInterfaces";
 import Projectile from "./Projectile";
 
 export default class Player implements IPlayer {

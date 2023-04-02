@@ -1,4 +1,4 @@
-import { IGame } from "../types/Interfaces";
+import { IGame } from "../types/ObjectsInterfaces";
 
 export default class InputHandler {
   game: IGame;

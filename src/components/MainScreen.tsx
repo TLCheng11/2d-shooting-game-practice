@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Game from "../objects/Game";
 import css from "../styles/MainScreen.module.css";
-import { IGame } from "../types/Interfaces";
+import { IGame } from "../types/ObjectsInterfaces";
 import GameBackground from "./GameBackground";
 
 function MainScreen() {
@@ -10,6 +10,10 @@ function MainScreen() {
 
   const currentTime = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const image1Ref = useRef<HTMLImageElement>(null);
+  const image2Ref = useRef<HTMLImageElement>(null);
+  const image3Ref = useRef<HTMLImageElement>(null);
+  const image4Ref = useRef<HTMLImageElement>(null);
 
   useLayoutEffect(() => {
     if (canvasRef.current) {
@@ -18,7 +22,14 @@ function MainScreen() {
       canvasRef.current.width = 500;
       canvasRef.current.height = 500;
 
-      setGame(new Game(canvasRef.current.width, canvasRef.current.height));
+      setGame(
+        new Game(canvasRef.current.width, canvasRef.current.height, [
+          image1Ref,
+          image2Ref,
+          image3Ref,
+          image4Ref,
+        ])
+      );
     }
   }, []);
 
@@ -48,7 +59,9 @@ function MainScreen() {
   return (
     <div>
       <canvas id={css.canvas1} ref={canvasRef}></canvas>
-      <GameBackground />
+      <GameBackground
+        backgroundRef={[image1Ref, image2Ref, image3Ref, image4Ref]}
+      />
     </div>
   );
 }

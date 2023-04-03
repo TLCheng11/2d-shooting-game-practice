@@ -79,6 +79,10 @@ export interface IPlayer {
   maxAmmo: number;
   ammoTimer: number;
   ammoRefreshTime: number;
+  image: HTMLImageElement | null;
+  frameX: number;
+  frameY: number;
+  maxFrame: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
   shootTop(): void;

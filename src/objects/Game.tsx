@@ -7,7 +7,7 @@ import {
   IPlayer,
   IProjectile,
   IUI,
-} from "../types/ObjectsInterfaces";
+} from "../types/objectsInterfaces";
 import Background from "./Background";
 import { Angler1 } from "./Enemy";
 import InputHandler from "./InputHandler";
@@ -35,14 +35,15 @@ export default class Game implements IGame {
   constructor(
     width: number,
     height: number,
-    backgroundRef: RefObject<HTMLImageElement>[]
+    backgroundRef: RefObject<HTMLImageElement>[],
+    playerImageRef: RefObject<HTMLImageElement>
   ) {
     this.isGameOver = false;
     this.width = width;
     this.height = height;
 
     // create all related classes
-    this.player = new Player(this);
+    this.player = new Player(this, playerImageRef);
     this.input = new InputHandler(this);
     this.ui = new UI(this);
     this.background = new Background(this, backgroundRef);

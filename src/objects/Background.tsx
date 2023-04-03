@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { IBackground, IGame, ILayer } from "../types/ObjectsInterfaces";
+import { IBackground, IGame, ILayer } from "../types/objectsInterfaces";
 import Layer from "./Layer";
 
 export default class Background implements IBackground {

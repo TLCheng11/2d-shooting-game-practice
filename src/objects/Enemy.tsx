@@ -1,4 +1,4 @@
-import { IEnemy, IGame } from "../types/ObjectsInterfaces";
+import { IEnemy, IGame } from "../types/objectsInterfaces";
 
 export default class Enemy implements IEnemy {
   game: IGame;

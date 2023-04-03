@@ -1,4 +1,5 @@
-import { IGame, IPlayer, IProjectile } from "../types/ObjectsInterfaces";
+import { RefObject } from "react";
+import { IGame, IPlayer, IProjectile } from "../types/objectsInterfaces";
 import Projectile from "./Projectile";
 
 export default class Player implements IPlayer {
@@ -14,8 +15,12 @@ export default class Player implements IPlayer {
   maxAmmo: number;
   ammoTimer: number;
   ammoRefreshTime: number;
+  image: HTMLImageElement | null;
+  frameX: number;
+  frameY: number;
+  maxFrame: number;
 
-  constructor(game: IGame) {
+  constructor(game: IGame, image: RefObject<HTMLImageElement>) {
     this.game = game;
     this.width = 120;
     this.height = 190;
@@ -30,6 +35,12 @@ export default class Player implements IPlayer {
     this.maxAmmo = 50;
     this.ammoTimer = 0;
     this.ammoRefreshTime = 500;
+
+    // assign image source
+    this.image = image.current;
+    this.frameX = 0;
+    this.frameY = 0;
+    this.maxFrame = 37;
   }
 
   update(): void {
@@ -45,6 +56,13 @@ export default class Player implements IPlayer {
 
     this.y += this.speedY;
 
+    // update player image frame
+    if (this.frameX < this.maxFrame) {
+      this.frameX++;
+    } else {
+      this.frameX = 0;
+    }
+
     // update projectiles
     this.projectiles.forEach((projectile) => {
       projectile.update();
@@ -57,6 +75,21 @@ export default class Player implements IPlayer {
   draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "black";
     context.fillRect(this.x, this.y, this.width, this.height);
+
+    // draw player
+    if (this.image) {
+      context.drawImage(
+        this.image,
+        this.frameX * this.width,
+        this.frameY * this.height,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
 
     // draw projectiles
     this.projectiles.forEach((projectile) => {

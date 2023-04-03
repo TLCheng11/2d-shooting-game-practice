@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
 import css from "../styles/GameBackground.module.css";
-import { IGameBackgroundProp } from "../types/ComponentsInterfaces";
+import { IGameBackgroundProp } from "../types/componentsInterfaces";
 
 function GameBackground({ backgroundRef }: IGameBackgroundProp) {
   const [
@@ -11,7 +10,7 @@ function GameBackground({ backgroundRef }: IGameBackgroundProp) {
   ] = backgroundRef;
 
   return (
-    <div>
+    <>
       <img
         id="layer1"
         ref={backgroundImage1Ref}
@@ -36,7 +35,7 @@ function GameBackground({ backgroundRef }: IGameBackgroundProp) {
         src="./assets/background/layer4.png"
         alt="layer4"
       />
-    </div>
+    </>
   );
 }
 

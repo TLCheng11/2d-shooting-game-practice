@@ -1,4 +1,4 @@
-import { IGame, IProjectile } from "../types/ObjectsInterfaces";
+import { IGame, IProjectile } from "../types/objectsInterfaces";
 
 export default class Projectile implements IProjectile {
   game: IGame;

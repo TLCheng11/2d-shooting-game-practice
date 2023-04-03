@@ -1,4 +1,4 @@
-import { IGame, ILayer } from "../types/ObjectsInterfaces";
+import { IGame, ILayer } from "../types/objectsInterfaces";
 
 export default class Layer implements ILayer {
   game: IGame;

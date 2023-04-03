@@ -4,10 +4,10 @@ import Layer from "./Layer";
 
 export default class Background implements IBackground {
   game: IGame;
-  image1: HTMLElement | null;
-  image2: HTMLElement | null;
-  image3: HTMLElement | null;
-  image4: HTMLElement | null;
+  image1: HTMLImageElement | null;
+  image2: HTMLImageElement | null;
+  image3: HTMLImageElement | null;
+  image4: HTMLImageElement | null;
   layer1: ILayer;
   layer2: ILayer;
   layer3: ILayer;

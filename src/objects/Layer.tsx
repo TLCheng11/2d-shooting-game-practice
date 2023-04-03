@@ -2,14 +2,18 @@ import { IGame, ILayer } from "../types/objectsInterfaces";
 
 export default class Layer implements ILayer {
   game: IGame;
-  image: any;
+  image: HTMLImageElement | null;
   speedModifier: number;
   width: number;
   height: number;
   x: number;
   y: number;
 
-  constructor(game: IGame, image: any, speedModifier: number) {
+  constructor(
+    game: IGame,
+    image: HTMLImageElement | null,
+    speedModifier: number
+  ) {
     this.game = game;
     this.image = image;
     this.speedModifier = speedModifier;
@@ -28,7 +32,9 @@ export default class Layer implements ILayer {
   }
 
   draw(context: CanvasRenderingContext2D): void {
-    context.drawImage(this.image, this.x, this.y);
-    context.drawImage(this.image, this.x + this.width, this.y);
+    if (this.image) {
+      context.drawImage(this.image, this.x, this.y);
+      context.drawImage(this.image, this.x + this.width, this.y);
+    }
   }
 }

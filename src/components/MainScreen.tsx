@@ -4,6 +4,7 @@ import css from "../styles/MainScreen.module.css";
 import { IGame } from "../types/objectsInterfaces";
 import GameBackground from "./GameBackground";
 import GamePlayer from "./GamePlayer";
+import GameEnemies from "./GameEnemies";
 
 function MainScreen() {
   const [game, setGame] = useState<IGame>();
@@ -79,6 +80,7 @@ function MainScreen() {
         ]}
       />
       <GamePlayer playerRef={[playerImageRef]} />
+      <GameEnemies />
     </div>
   );
 }

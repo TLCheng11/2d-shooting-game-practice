@@ -22,6 +22,11 @@ function MainScreen() {
   // ref to hold player image
   const playerImageRef = useRef<HTMLImageElement>(null);
 
+  // ref to hold enemies images
+  const angler1ImageRef = useRef<HTMLImageElement>(null);
+  const angler2ImageRef = useRef<HTMLImageElement>(null);
+  const luckyImageRef = useRef<HTMLImageElement>(null);
+
   useLayoutEffect(() => {
     if (canvasRef.current) {
       const c = canvasRef.current.getContext("2d");
@@ -39,7 +44,8 @@ function MainScreen() {
             backgroundImage3Ref,
             backgroundImage4Ref,
           ],
-          playerImageRef
+          playerImageRef,
+          [angler1ImageRef, angler2ImageRef, luckyImageRef]
         )
       );
     }
@@ -80,7 +86,9 @@ function MainScreen() {
         ]}
       />
       <GamePlayer playerRef={[playerImageRef]} />
-      <GameEnemies />
+      <GameEnemies
+        enemiesRef={[angler1ImageRef, angler2ImageRef, luckyImageRef]}
+      />
     </div>
   );
 }

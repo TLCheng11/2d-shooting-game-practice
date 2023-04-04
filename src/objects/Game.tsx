@@ -27,6 +27,7 @@ export default class Game implements IGame {
   enemies: IEnemy[];
   enemyTimer: number;
   enemyInterval: number;
+  enemiesImageRef: RefObject<HTMLImageElement>[];
   score: number;
   winningScore: number;
   gameTime: number;
@@ -37,7 +38,8 @@ export default class Game implements IGame {
     width: number,
     height: number,
     backgroundRef: RefObject<HTMLImageElement>[],
-    playerImageRef: RefObject<HTMLImageElement>
+    playerImageRef: RefObject<HTMLImageElement>,
+    enemiesImageRef: RefObject<HTMLImageElement>[]
   ) {
     this.isGameOver = false;
     this.debug = false;
@@ -57,6 +59,7 @@ export default class Game implements IGame {
     this.enemies = [];
     this.enemyTimer = 0;
     this.enemyInterval = 1000;
+    this.enemiesImageRef = enemiesImageRef;
 
     // init score
     this.score = 0;
@@ -126,7 +129,7 @@ export default class Game implements IGame {
 
   addEnemy(deltaTime: number): void {
     if (this.enemyTimer > this.enemyInterval && !this.isGameOver) {
-      this.enemies.push(new Angler1(this));
+      this.enemies.push(new Angler1(this, this.enemiesImageRef[0]));
       this.enemyTimer = 0;
     } else {
       this.enemyTimer += deltaTime;

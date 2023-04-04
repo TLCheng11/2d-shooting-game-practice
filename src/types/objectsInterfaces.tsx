@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 export interface IBackground {
   game: IGame;
   image1: HTMLImageElement | null;
@@ -23,6 +25,10 @@ export interface IEnemy {
   markedForDeletion: boolean;
   lives: number;
   score: number;
+  image: HTMLImageElement | null;
+  frameX: number;
+  frameY: number;
+  maxFrame: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }
@@ -40,6 +46,7 @@ export interface IGame {
   enemies: IEnemy[];
   enemyTimer: number;
   enemyInterval: number;
+  enemiesImageRef: RefObject<HTMLImageElement>[];
   score: number;
   winningScore: number;
   gameTime: number;

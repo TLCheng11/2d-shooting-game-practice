@@ -17,6 +17,7 @@ export interface IBackground {
 
 export interface IEnemy {
   game: IGame;
+  type: string;
   x: number;
   y: number;
   width: number;

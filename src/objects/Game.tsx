@@ -9,7 +9,7 @@ import {
   IUI,
 } from "../types/objectsInterfaces";
 import Background from "./Background";
-import { Angler1 } from "./Enemy";
+import { Angler1, Angler2, Lucky } from "./Enemy";
 import InputHandler from "./InputHandler";
 import Player from "./Player";
 import UI from "./UI";
@@ -128,8 +128,15 @@ export default class Game implements IGame {
   }
 
   addEnemy(deltaTime: number): void {
+    const randomize = Math.random() * 3;
     if (this.enemyTimer > this.enemyInterval && !this.isGameOver) {
-      this.enemies.push(new Angler1(this, this.enemiesImageRef[0]));
+      if (randomize < 1.3) {
+        this.enemies.push(new Angler1(this, this.enemiesImageRef[0]));
+      } else if (randomize >= 1.3 && randomize < 1.7) {
+        this.enemies.push(new Lucky(this, this.enemiesImageRef[2]));
+      } else {
+        this.enemies.push(new Angler2(this, this.enemiesImageRef[1]));
+      }
       this.enemyTimer = 0;
     } else {
       this.enemyTimer += deltaTime;

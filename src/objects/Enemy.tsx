@@ -3,6 +3,7 @@ import { IEnemy, IGame } from "../types/objectsInterfaces";
 
 export default class Enemy implements IEnemy {
   game: IGame;
+  type: string;
   x: number;
   y: number;
   width: number;
@@ -21,6 +22,7 @@ export default class Enemy implements IEnemy {
     this.y = this.width = this.height = this.lives = this.score = 0;
 
     this.game = game;
+    this.type = "enemy";
     // enemy come out from right edge
     this.x = this.game.width;
     this.speedX = Math.random() * -1.5 - 0.5;
@@ -80,8 +82,35 @@ export class Angler1 extends Enemy {
     this.height = 169;
     this.y = Math.random() * (this.game.height * 0.9 - this.height);
     this.lives = 2;
-    this.score = 2;
+    this.score = this.lives;
     this.frameX = 0;
     this.frameY = Math.floor(Math.random() * 3);
+  }
+}
+
+export class Angler2 extends Enemy {
+  constructor(game: IGame, imageRef: RefObject<HTMLImageElement>) {
+    super(game, imageRef);
+    this.width = 213;
+    this.height = 165;
+    this.y = Math.random() * (this.game.height * 0.9 - this.height);
+    this.lives = 3;
+    this.score = this.lives;
+    this.frameX = 0;
+    this.frameY = Math.floor(Math.random() * 2);
+  }
+}
+
+export class Lucky extends Enemy {
+  constructor(game: IGame, imageRef: RefObject<HTMLImageElement>) {
+    super(game, imageRef);
+    this.width = 99;
+    this.height = 95;
+    this.y = Math.random() * (this.game.height * 0.9 - this.height);
+    this.lives = 3;
+    this.score = 15;
+    this.frameX = 0;
+    this.frameY = Math.floor(Math.random() * 2);
+    this.type = "lucky";
   }
 }

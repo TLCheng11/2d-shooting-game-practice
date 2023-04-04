@@ -73,8 +73,10 @@ export default class Player implements IPlayer {
   }
 
   draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "black";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    // box for debug mode
+    if (this.game.debug) {
+      context.strokeRect(this.x, this.y, this.width, this.height);
+    }
 
     // draw player
     if (this.image) {

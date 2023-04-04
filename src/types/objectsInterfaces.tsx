@@ -29,6 +29,7 @@ export interface IEnemy {
 
 export interface IGame {
   isGameOver: boolean;
+  debug: boolean;
   width: number;
   height: number;
   player: IPlayer;

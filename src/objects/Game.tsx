@@ -16,6 +16,7 @@ import UI from "./UI";
 
 export default class Game implements IGame {
   isGameOver: boolean;
+  debug: boolean;
   width: number;
   height: number;
   player: IPlayer;
@@ -39,6 +40,7 @@ export default class Game implements IGame {
     playerImageRef: RefObject<HTMLImageElement>
   ) {
     this.isGameOver = false;
+    this.debug = false;
     this.width = width;
     this.height = height;
 

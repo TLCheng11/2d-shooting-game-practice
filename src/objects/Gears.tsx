@@ -18,6 +18,7 @@ export default class Gears implements IGears {
   velocityOfAngle: number;
   markedForDeletion: boolean;
   bounce: number;
+  bottomBounceBoundary: number;
 
   constructor(
     game: IGame,
@@ -50,6 +51,7 @@ export default class Gears implements IGears {
     // randomize bounce time before deletion
     this.markedForDeletion = false;
     this.bounce = Math.ceil(Math.random() * 3);
+    this.bottomBounceBoundary = Math.random() * 100 + 60;
   }
 
   update(): void {
@@ -57,10 +59,11 @@ export default class Gears implements IGears {
     this.speedY += this.gravity;
     this.x += this.speedX;
     this.y += this.speedY;
-    if (this.y > this.game.height) {
+    if (this.y > this.game.height - this.bottomBounceBoundary) {
       if (this.bounce <= 0) {
         this.markedForDeletion = true;
       } else {
+        this.speedY *= -0.5;
         this.bounce--;
       }
     }

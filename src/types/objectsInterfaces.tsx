@@ -78,6 +78,7 @@ export interface IGears {
   velocityOfAngle: number;
   markedForDeletion: boolean;
   bounce: number;
+  bottomBounceBoundary: number;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }

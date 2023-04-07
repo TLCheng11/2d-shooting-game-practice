@@ -104,6 +104,27 @@ export interface IPlayer {
   enterPowerUp(): void;
 }
 
+export interface IParticle {
+  game: IGame;
+  x: number;
+  y: number;
+  image: HTMLElement | null;
+  frameX: number;
+  frameY: number;
+  spriteSize: number;
+  sizeModifier: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  gravity: number;
+  angle: number;
+  velocityOfAngle: number;
+  markedForDeletion: boolean;
+  bounce: number;
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
+}
+
 export interface IProjectile {
   game: IGame;
   x: number;

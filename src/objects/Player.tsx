@@ -16,6 +16,7 @@ export default class Player implements IPlayer {
   ammoTimer: number;
   ammoRefreshTime: number;
   image: HTMLImageElement | null;
+  projectileImage: HTMLImageElement | null;
   frameX: number;
   frameY: number;
   maxFrame: number;
@@ -23,7 +24,7 @@ export default class Player implements IPlayer {
   powerUpTimer: number;
   powerUpTimeLimit: number;
 
-  constructor(game: IGame, image: RefObject<HTMLImageElement>) {
+  constructor(game: IGame, image: RefObject<HTMLImageElement>[]) {
     this.game = game;
     this.width = 120;
     this.height = 190;
@@ -40,10 +41,13 @@ export default class Player implements IPlayer {
     this.ammoRefreshTime = 500;
 
     // assign image source
-    this.image = image.current;
+    this.image = image[0].current;
     this.frameX = 0;
     this.frameY = 0;
     this.maxFrame = 37;
+
+    // assign image for projectile
+    this.projectileImage = image[1].current;
 
     // init power up variable
     this.isPowerUp = false;
@@ -122,7 +126,12 @@ export default class Player implements IPlayer {
   shootTop(): void {
     if (this.ammo > 0) {
       this.projectiles.push(
-        new Projectile(this.game, this.x + 80, this.y + 30)
+        new Projectile(
+          this.game,
+          this.x + 80,
+          this.y + 30,
+          this.projectileImage
+        )
       );
 
       // shoot extra ammo in powerup mode
@@ -136,7 +145,12 @@ export default class Player implements IPlayer {
   shootBottom(): void {
     if (this.ammo > 0) {
       this.projectiles.push(
-        new Projectile(this.game, this.x + 80, this.y + 175)
+        new Projectile(
+          this.game,
+          this.x + 80,
+          this.y + 175,
+          this.projectileImage
+        )
       );
     }
   }

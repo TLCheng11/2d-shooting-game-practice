@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import { IGame, IProjectile } from "../types/objectsInterfaces";
 
 export default class Projectile implements IProjectile {
@@ -8,8 +9,14 @@ export default class Projectile implements IProjectile {
   height: number;
   speed: number;
   markedForDeletion: boolean;
+  image: HTMLImageElement | null;
 
-  constructor(game: IGame, x: number, y: number) {
+  constructor(
+    game: IGame,
+    x: number,
+    y: number,
+    image: HTMLImageElement | null
+  ) {
     this.game = game;
     this.x = x;
     this.y = y;
@@ -17,6 +24,7 @@ export default class Projectile implements IProjectile {
     this.height = 3;
     this.speed = 3;
     this.markedForDeletion = false;
+    this.image = image;
   }
 
   update(): void {
@@ -26,7 +34,8 @@ export default class Projectile implements IProjectile {
   }
 
   draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "yellow";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    if (this.image) {
+      context.drawImage(this.image, this.x, this.y);
+    }
   }
 }

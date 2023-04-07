@@ -89,6 +89,7 @@ export interface IPlayer {
   ammoTimer: number;
   ammoRefreshTime: number;
   image: HTMLImageElement | null;
+  projectileImage: HTMLImageElement | null;
   frameX: number;
   frameY: number;
   maxFrame: number;
@@ -111,6 +112,7 @@ export interface IProjectile {
   height: number;
   speed: number;
   markedForDeletion: boolean;
+  image: HTMLImageElement | null;
   update(): void;
   draw(context: CanvasRenderingContext2D): void;
 }

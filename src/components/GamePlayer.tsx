@@ -1,7 +1,7 @@
 import { IPlayerProp } from "../types/componentsInterfaces";
 
 function GamePlayer({ playerRef }: IPlayerProp) {
-  const [playerImageRef] = playerRef;
+  const [playerImageRef, projectileImageRef] = playerRef;
 
   return (
     <>
@@ -10,6 +10,12 @@ function GamePlayer({ playerRef }: IPlayerProp) {
         ref={playerImageRef}
         src="./assets/player/player.png"
         alt="player"
+      />
+      <img
+        id="projectile"
+        ref={projectileImageRef}
+        src="./assets/player/projectile.png"
+        alt="projectile"
       />
     </>
   );

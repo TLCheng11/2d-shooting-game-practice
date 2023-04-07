@@ -21,6 +21,7 @@ function MainScreen() {
 
   // ref to hold player image
   const playerImageRef = useRef<HTMLImageElement>(null);
+  const projectileImageRef = useRef<HTMLImageElement>(null);
 
   // ref to hold enemies images
   const angler1ImageRef = useRef<HTMLImageElement>(null);
@@ -44,7 +45,7 @@ function MainScreen() {
             backgroundImage3Ref,
             backgroundImage4Ref,
           ],
-          playerImageRef,
+          [playerImageRef, projectileImageRef],
           [angler1ImageRef, angler2ImageRef, luckyImageRef]
         )
       );
@@ -85,7 +86,7 @@ function MainScreen() {
           backgroundImage4Ref,
         ]}
       />
-      <GamePlayer playerRef={[playerImageRef]} />
+      <GamePlayer playerRef={[playerImageRef, projectileImageRef]} />
       <GameEnemies
         enemiesRef={[angler1ImageRef, angler2ImageRef, luckyImageRef]}
       />

@@ -38,7 +38,7 @@ export default class Game implements IGame {
     width: number,
     height: number,
     backgroundRef: RefObject<HTMLImageElement>[],
-    playerImageRef: RefObject<HTMLImageElement>,
+    playerImageRef: RefObject<HTMLImageElement>[],
     enemiesImageRef: RefObject<HTMLImageElement>[]
   ) {
     this.isGameOver = false;

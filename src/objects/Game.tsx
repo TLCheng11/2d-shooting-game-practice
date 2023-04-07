@@ -63,7 +63,7 @@ export default class Game implements IGame {
 
     // init score
     this.score = 0;
-    this.winningScore = 10;
+    this.winningScore = 100;
 
     // init Game time limit
     this.gameTime = 0;
@@ -96,9 +96,8 @@ export default class Game implements IGame {
         // check collision
         if (this.checkCollision(this.player, enemy)) {
           enemy.markedForDeletion = true;
-          if (!this.player.isPowerUp && enemy.type == "lucky") {
-            this.player.isPowerUp = true;
-            this.player.frameY = 1;
+          if (enemy.type == "lucky") {
+            this.player.enterPowerUp();
           }
         }
 

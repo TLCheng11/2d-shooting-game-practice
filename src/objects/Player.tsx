@@ -82,6 +82,7 @@ export default class Player implements IPlayer {
     // power up logic
     if (this.isPowerUp && this.powerUpTimer < this.powerUpTimeLimit) {
       this.powerUpTimer += deltaTime;
+      this.ammo += 0.1;
     } else {
       this.isPowerUp = false;
       this.powerUpTimer = 0;
@@ -121,7 +122,18 @@ export default class Player implements IPlayer {
       this.projectiles.push(
         new Projectile(this.game, this.x + 80, this.y + 30)
       );
+      if (this.isPowerUp) {
+        this.shootBottom();
+      }
       this.ammo--;
+    }
+  }
+
+  shootBottom(): void {
+    if (this.ammo > 0) {
+      this.projectiles.push(
+        new Projectile(this.game, this.x + 80, this.y + 175)
+      );
     }
   }
 
@@ -133,5 +145,12 @@ export default class Player implements IPlayer {
         this.ammo++;
         this.ammoTimer = 0;
       }
+  }
+
+  enterPowerUp(): void {
+    this.powerUpTimer = 0;
+    this.isPowerUp = true;
+    this.frameY = 1;
+    this.ammo = this.maxAmmo;
   }
 }

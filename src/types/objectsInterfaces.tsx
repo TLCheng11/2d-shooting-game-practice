@@ -98,7 +98,9 @@ export interface IPlayer {
   update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   shootTop(): void;
+  shootBottom(): void;
   addAmmo(deltaTime: number): void;
+  enterPowerUp(): void;
 }
 
 export interface IProjectile {

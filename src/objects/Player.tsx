@@ -58,9 +58,15 @@ export default class Player implements IPlayer {
   update(deltaTime: number): void {
     if (this.game.keys.has("ArrowUp") && this.game.keys.has("ArrowDown")) {
       this.speedY = 0;
-    } else if (this.game.keys.has("ArrowUp")) {
+    } else if (
+      this.game.keys.has("ArrowUp") &&
+      this.y > 0 - this.height * 0.5
+    ) {
       this.speedY = -this.maxSpeed;
-    } else if (this.game.keys.has("ArrowDown")) {
+    } else if (
+      this.game.keys.has("ArrowDown") &&
+      this.y < this.game.height - this.height * 0.5
+    ) {
       this.speedY = this.maxSpeed;
     } else {
       this.speedY = 0;

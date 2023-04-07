@@ -110,7 +110,7 @@ export default class Game implements IGame {
             enemy.y + enemy.height * 0.5,
             10
           );
-          if (enemy.type == "lucky") {
+          if (enemy.type === "lucky") {
             this.player.enterPowerUp();
           }
         }
@@ -125,7 +125,7 @@ export default class Game implements IGame {
               enemy.y + enemy.height * 0.5,
               1
             );
-            // delete enemy when its lives == 0
+            // delete enemy when its lives === 0
             if (enemy.lives <= 0) {
               enemy.markedForDeletion = true;
               this.addGear(

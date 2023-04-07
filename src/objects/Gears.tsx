@@ -51,13 +51,13 @@ export default class Gears implements IGears {
     // randomize bounce time before deletion
     this.markedForDeletion = false;
     this.bounce = Math.ceil(Math.random() * 3);
-    this.bottomBounceBoundary = Math.random() * 100 + 60;
+    this.bottomBounceBoundary = Math.random() * 80 + 60;
   }
 
   update(): void {
     this.angle += this.velocityOfAngle;
     this.speedY += this.gravity;
-    this.x += this.speedX;
+    this.x += this.speedX + this.game.speed;
     this.y += this.speedY;
     if (this.y > this.game.height - this.bottomBounceBoundary) {
       if (this.bounce <= 0) {
@@ -70,6 +70,9 @@ export default class Gears implements IGears {
   }
 
   draw(context: CanvasRenderingContext2D): void {
+    context.save();
+    context.translate(this.x, this.y);
+    context.rotate(this.angle);
     if (this.image) {
       context.drawImage(
         this.image,
@@ -77,11 +80,12 @@ export default class Gears implements IGears {
         this.frameY * this.spriteSize,
         this.spriteSize,
         this.spriteSize,
-        this.x,
-        this.y,
+        this.size * -0.5,
+        this.size * -0.5,
         this.size,
         this.size
       );
     }
+    context.restore();
   }
 }

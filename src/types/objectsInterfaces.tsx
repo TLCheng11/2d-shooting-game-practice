@@ -108,7 +108,7 @@ export interface IParticle {
   game: IGame;
   x: number;
   y: number;
-  image: HTMLElement | null;
+  image: HTMLImageElement | null;
   frameX: number;
   frameY: number;
   spriteSize: number;

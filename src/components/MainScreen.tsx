@@ -27,6 +27,7 @@ function MainScreen() {
   const angler1ImageRef = useRef<HTMLImageElement>(null);
   const angler2ImageRef = useRef<HTMLImageElement>(null);
   const luckyImageRef = useRef<HTMLImageElement>(null);
+  const gearsImageRef = useRef<HTMLImageElement>(null);
 
   useLayoutEffect(() => {
     if (canvasRef.current) {
@@ -46,7 +47,7 @@ function MainScreen() {
             backgroundImage4Ref,
           ],
           [playerImageRef, projectileImageRef],
-          [angler1ImageRef, angler2ImageRef, luckyImageRef]
+          [angler1ImageRef, angler2ImageRef, luckyImageRef, gearsImageRef]
         )
       );
     }

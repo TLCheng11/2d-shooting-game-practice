@@ -26,11 +26,15 @@ export default class UI implements IUI {
     context.fillText("Score: " + this.game.score.toString(), 20, 40);
 
     // ui to show ammo amount
+    if (this.game.player.isPowerUp) {
+      context.fillStyle = "#ffffbd";
+    }
     for (let i = 0; i < this.game.player.ammo; i++) {
       context.fillRect(20 + i * 5, 50, 3, 20);
     }
 
     // timer
+    context.fillStyle = this.color;
     const formattedTime = this.game.gameTime * 0.001;
     context.fillText("Timer: " + formattedTime.toFixed(2).toString(), 20, 100);
     context.restore();

@@ -82,7 +82,9 @@ export default class Player implements IPlayer {
     // power up logic
     if (this.isPowerUp && this.powerUpTimer < this.powerUpTimeLimit) {
       this.powerUpTimer += deltaTime;
-      this.ammo += 0.1;
+      if (this.ammo < this.maxAmmo) {
+        this.ammo += 0.1;
+      }
     } else {
       this.isPowerUp = false;
       this.powerUpTimer = 0;
@@ -95,6 +97,11 @@ export default class Player implements IPlayer {
     if (this.game.debug) {
       context.strokeRect(this.x, this.y, this.width, this.height);
     }
+
+    // draw projectiles
+    this.projectiles.forEach((projectile) => {
+      projectile.draw(context);
+    });
 
     // draw player
     if (this.image) {
@@ -110,11 +117,6 @@ export default class Player implements IPlayer {
         this.height
       );
     }
-
-    // draw projectiles
-    this.projectiles.forEach((projectile) => {
-      projectile.draw(context);
-    });
   }
 
   shootTop(): void {
@@ -122,6 +124,8 @@ export default class Player implements IPlayer {
       this.projectiles.push(
         new Projectile(this.game, this.x + 80, this.y + 30)
       );
+
+      // shoot extra ammo in powerup mode
       if (this.isPowerUp) {
         this.shootBottom();
       }

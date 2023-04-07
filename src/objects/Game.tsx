@@ -4,6 +4,7 @@ import {
   IEnemy,
   IGame,
   IInputHandler,
+  IGears,
   IPlayer,
   IProjectile,
   IUI,
@@ -13,6 +14,7 @@ import { Angler1, Angler2, Lucky } from "./Enemy";
 import InputHandler from "./InputHandler";
 import Player from "./Player";
 import UI from "./UI";
+import Gears from "./Gears";
 
 export default class Game implements IGame {
   isGameOver: boolean;
@@ -28,6 +30,8 @@ export default class Game implements IGame {
   enemyTimer: number;
   enemyInterval: number;
   enemiesImageRef: RefObject<HTMLImageElement>[];
+  gears: IGears[];
+  gearsImageRef: RefObject<HTMLImageElement>;
   score: number;
   winningScore: number;
   gameTime: number;
@@ -39,7 +43,8 @@ export default class Game implements IGame {
     height: number,
     backgroundRef: RefObject<HTMLImageElement>[],
     playerImageRef: RefObject<HTMLImageElement>[],
-    enemiesImageRef: RefObject<HTMLImageElement>[]
+    enemiesImageRef: RefObject<HTMLImageElement>[],
+    gearsImageRef: RefObject<HTMLImageElement>[]
   ) {
     this.isGameOver = false;
     this.debug = false;
@@ -60,6 +65,10 @@ export default class Game implements IGame {
     this.enemyTimer = 0;
     this.enemyInterval = 1000;
     this.enemiesImageRef = enemiesImageRef;
+
+    // array to hold gears
+    this.gears = [];
+    this.gearsImageRef = gearsImageRef[0];
 
     // init score
     this.score = 0;
@@ -96,6 +105,11 @@ export default class Game implements IGame {
         // check collision
         if (this.checkCollision(this.player, enemy)) {
           enemy.markedForDeletion = true;
+          this.addGear(
+            enemy.x + enemy.width * 0.5,
+            enemy.y + enemy.height * 0.5,
+            10
+          );
           if (enemy.type == "lucky") {
             this.player.enterPowerUp();
           }
@@ -105,8 +119,20 @@ export default class Game implements IGame {
         this.player.projectiles.forEach((projectile) => {
           if (this.checkCollision(projectile, enemy)) {
             enemy.lives--;
+            // add broken gear on projectile hit
+            this.addGear(
+              enemy.x + enemy.width * 0.5,
+              enemy.y + enemy.height * 0.5,
+              1
+            );
+            // delete enemy when its lives == 0
             if (enemy.lives <= 0) {
               enemy.markedForDeletion = true;
+              this.addGear(
+                enemy.x + enemy.width * 0.5,
+                enemy.y + enemy.height * 0.5,
+                10
+              );
               this.score += enemy.score;
               if (this.score >= this.winningScore) {
                 this.isGameOver = true;
@@ -115,6 +141,10 @@ export default class Game implements IGame {
             projectile.markedForDeletion = true;
           }
         });
+
+        // delete gear if hit the ground with no more bounce left
+        this.gears.forEach((gear) => gear.update());
+        this.gears.filter((gear) => !gear.markedForDeletion);
       });
       this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
       this.addEnemy(deltaTime);
@@ -123,6 +153,7 @@ export default class Game implements IGame {
 
   draw(context: CanvasRenderingContext2D): void {
     this.background.draw(context);
+    this.gears.forEach((gear) => gear.draw(context));
     this.player.draw(context);
     this.enemies.forEach((enemy) => enemy.draw(context));
     this.ui.draw(context);
@@ -153,5 +184,11 @@ export default class Game implements IGame {
       rect1.y < rect2.y + rect2.height &&
       rect1.y + rect1.height > rect2.y
     );
+  }
+
+  addGear(x: number, y: number, pieces: number): void {
+    for (let i = 0; i < pieces; i++) {
+      this.gears.push(new Gears(this, x, y, this.gearsImageRef));
+    }
   }
 }

@@ -48,6 +48,8 @@ export interface IGame {
   enemyTimer: number;
   enemyInterval: number;
   enemiesImageRef: RefObject<HTMLImageElement>[];
+  gears: IGears[];
+  gearsImageRef: RefObject<HTMLImageElement>;
   score: number;
   winningScore: number;
   gameTime: number;
@@ -57,6 +59,27 @@ export interface IGame {
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;
   checkCollision(rect1: IPlayer | IProjectile, rect2: IEnemy): boolean;
+}
+
+export interface IGears {
+  game: IGame;
+  x: number;
+  y: number;
+  image: HTMLImageElement | null;
+  frameX: number;
+  frameY: number;
+  spriteSize: number;
+  sizeModifier: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  gravity: number;
+  angle: number;
+  velocityOfAngle: number;
+  markedForDeletion: boolean;
+  bounce: number;
+  update(): void;
+  draw(context: CanvasRenderingContext2D): void;
 }
 
 export interface IInputHandler {
@@ -102,27 +125,6 @@ export interface IPlayer {
   shootBottom(): void;
   addAmmo(deltaTime: number): void;
   enterPowerUp(): void;
-}
-
-export interface IParticle {
-  game: IGame;
-  x: number;
-  y: number;
-  image: HTMLImageElement | null;
-  frameX: number;
-  frameY: number;
-  spriteSize: number;
-  sizeModifier: number;
-  size: number;
-  speedX: number;
-  speedY: number;
-  gravity: number;
-  angle: number;
-  velocityOfAngle: number;
-  markedForDeletion: boolean;
-  bounce: number;
-  update(): void;
-  draw(context: CanvasRenderingContext2D): void;
 }
 
 export interface IProjectile {

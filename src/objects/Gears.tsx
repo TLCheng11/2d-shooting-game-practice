@@ -1,7 +1,7 @@
 import { RefObject } from "react";
-import { IGame, IParticle } from "../types/objectsInterfaces";
+import { IGame, IGears } from "../types/objectsInterfaces";
 
-export default class Particle implements IParticle {
+export default class Gears implements IGears {
   game: IGame;
   x: number;
   y: number;
@@ -43,7 +43,7 @@ export default class Particle implements IParticle {
     this.speedX = Math.random() * 6 - 3;
     // move upward first, than adjust it with gravity to move downward
     this.speedY = Math.random() * -15;
-    this.gravity = 0.5;
+    this.gravity = 0.2;
     // adjust rotation angle
     this.angle = 0;
     this.velocityOfAngle = Math.random() * 0.2 - 0.1;
@@ -58,7 +58,11 @@ export default class Particle implements IParticle {
     this.x += this.speedX;
     this.y += this.speedY;
     if (this.y > this.game.height) {
-      this.markedForDeletion = true;
+      if (this.bounce <= 0) {
+        this.markedForDeletion = true;
+      } else {
+        this.bounce--;
+      }
     }
   }
 

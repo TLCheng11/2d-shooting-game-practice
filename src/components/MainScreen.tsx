@@ -47,7 +47,8 @@ function MainScreen() {
             backgroundImage4Ref,
           ],
           [playerImageRef, projectileImageRef],
-          [angler1ImageRef, angler2ImageRef, luckyImageRef, gearsImageRef]
+          [angler1ImageRef, angler2ImageRef, luckyImageRef],
+          [gearsImageRef]
         )
       );
     }
@@ -89,7 +90,12 @@ function MainScreen() {
       />
       <GamePlayer playerRef={[playerImageRef, projectileImageRef]} />
       <GameEnemies
-        enemiesRef={[angler1ImageRef, angler2ImageRef, luckyImageRef]}
+        enemiesRef={[
+          angler1ImageRef,
+          angler2ImageRef,
+          luckyImageRef,
+          gearsImageRef,
+        ]}
       />
     </div>
   );

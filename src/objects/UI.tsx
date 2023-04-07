@@ -9,7 +9,7 @@ export default class UI implements IUI {
   constructor(game: IGame) {
     this.game = game;
     this.fontSize = 25;
-    this.fontFamily = "Helvetica";
+    this.fontFamily = "Bangers";
     this.color = "white";
   }
 

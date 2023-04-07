@@ -92,7 +92,10 @@ export interface IPlayer {
   frameX: number;
   frameY: number;
   maxFrame: number;
-  update(): void;
+  isPowerUp: boolean;
+  powerUpTimer: number;
+  powerUpTimeLimit: number;
+  update(deltaTime: number): void;
   draw(context: CanvasRenderingContext2D): void;
   shootTop(): void;
   addAmmo(deltaTime: number): void;

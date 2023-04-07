@@ -19,6 +19,9 @@ export default class Player implements IPlayer {
   frameX: number;
   frameY: number;
   maxFrame: number;
+  isPowerUp: boolean;
+  powerUpTimer: number;
+  powerUpTimeLimit: number;
 
   constructor(game: IGame, image: RefObject<HTMLImageElement>) {
     this.game = game;
@@ -41,9 +44,14 @@ export default class Player implements IPlayer {
     this.frameX = 0;
     this.frameY = 0;
     this.maxFrame = 37;
+
+    // init power up variable
+    this.isPowerUp = false;
+    this.powerUpTimer = 0;
+    this.powerUpTimeLimit = 10000;
   }
 
-  update(): void {
+  update(deltaTime: number): void {
     if (this.game.keys.has("ArrowUp") && this.game.keys.has("ArrowDown")) {
       this.speedY = 0;
     } else if (this.game.keys.has("ArrowUp")) {
@@ -70,6 +78,15 @@ export default class Player implements IPlayer {
     this.projectiles = this.projectiles.filter(
       (projectile) => !projectile.markedForDeletion
     );
+
+    // power up logic
+    if (this.isPowerUp && this.powerUpTimer < this.powerUpTimeLimit) {
+      this.powerUpTimer += deltaTime;
+    } else {
+      this.isPowerUp = false;
+      this.powerUpTimer = 0;
+      this.frameY = 0;
+    }
   }
 
   draw(context: CanvasRenderingContext2D): void {

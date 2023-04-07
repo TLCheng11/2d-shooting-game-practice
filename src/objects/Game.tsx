@@ -67,7 +67,7 @@ export default class Game implements IGame {
 
     // init Game time limit
     this.gameTime = 0;
-    this.timeLimit = 20000;
+    this.timeLimit = 100000;
     this.speed = 1;
   }
 
@@ -86,7 +86,7 @@ export default class Game implements IGame {
       this.gameTime += deltaTime;
 
       // update player
-      this.player.update();
+      this.player.update(deltaTime);
       this.player.addAmmo(deltaTime);
 
       // handle enemies
@@ -96,6 +96,10 @@ export default class Game implements IGame {
         // check collision
         if (this.checkCollision(this.player, enemy)) {
           enemy.markedForDeletion = true;
+          if (!this.player.isPowerUp && enemy.type == "lucky") {
+            this.player.isPowerUp = true;
+            this.player.frameY = 1;
+          }
         }
 
         // check projectile hit

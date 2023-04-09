@@ -114,3 +114,37 @@ export class Lucky extends Enemy {
     this.type = "lucky";
   }
 }
+
+export class HiveWhale extends Enemy {
+  constructor(game: IGame, imageRef: RefObject<HTMLImageElement>) {
+    super(game, imageRef);
+    this.width = 400;
+    this.height = 227;
+    this.y = Math.random() * (this.game.height * 0.8 - this.height);
+    this.speedX = Math.random() * -0.8 - 0.2;
+    this.lives = 15;
+    this.score = this.lives;
+    this.frameX = 0;
+    this.type = "hiveWhale";
+  }
+}
+
+export class Drone extends Enemy {
+  constructor(
+    game: IGame,
+    imageRef: RefObject<HTMLImageElement>,
+    x: number,
+    y: number
+  ) {
+    super(game, imageRef);
+    this.width = 400;
+    this.height = 227;
+    this.x = x;
+    this.y = y;
+    this.speedX = Math.random() * -3 - 0.8;
+    this.lives = 2;
+    this.score = this.lives;
+    this.frameX = 0;
+    this.frameY = Math.floor(Math.random() * 2);
+  }
+}

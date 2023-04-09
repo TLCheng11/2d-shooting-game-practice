@@ -1,8 +1,14 @@
 import { IGameEnemiesPorp } from "../types/componentsInterfaces";
 
 function GameEnemies({ enemiesRef }: IGameEnemiesPorp) {
-  const [angler1ImageRef, angler2ImageRef, luckyImageRef, gearsImageRef] =
-    enemiesRef;
+  const [
+    angler1ImageRef,
+    angler2ImageRef,
+    luckyImageRef,
+    gearsImageRef,
+    hiveWhaleImageRef,
+    droneImageRef,
+  ] = enemiesRef;
 
   return (
     <>
@@ -23,6 +29,18 @@ function GameEnemies({ enemiesRef }: IGameEnemiesPorp) {
         ref={luckyImageRef}
         src="./assets/enemies/lucky.png"
         alt="lucky"
+      />
+      <img
+        id="hiveWhale"
+        ref={hiveWhaleImageRef}
+        src="./assets/enemies/hivewhale.png"
+        alt="hiveWhale"
+      />
+      <img
+        id="drone"
+        ref={droneImageRef}
+        src="./assets/enemies/drone.png"
+        alt="drone"
       />
       <img
         id="gears"

@@ -5,6 +5,7 @@ import { IGame } from "../types/objectsInterfaces";
 import GameBackground from "./GameBackground";
 import GamePlayer from "./GamePlayer";
 import GameEnemies from "./GameEnemies";
+import GameEffects from "./GameEffects";
 
 function MainScreen() {
   const [game, setGame] = useState<IGame>();
@@ -29,7 +30,11 @@ function MainScreen() {
   const luckyImageRef = useRef<HTMLImageElement>(null);
   const hiveWhaleImageRef = useRef<HTMLImageElement>(null);
   const droneImageRef = useRef<HTMLImageElement>(null);
+
+  // ref to hold game effects images
   const gearsImageRef = useRef<HTMLImageElement>(null);
+  const fireImageRef = useRef<HTMLImageElement>(null);
+  const smokeImageRef = useRef<HTMLImageElement>(null);
 
   useLayoutEffect(() => {
     if (canvasRef.current) {
@@ -102,11 +107,11 @@ function MainScreen() {
           angler1ImageRef,
           angler2ImageRef,
           luckyImageRef,
-          gearsImageRef,
           hiveWhaleImageRef,
           droneImageRef,
         ]}
       />
+      <GameEffects effectsRef={[gearsImageRef, fireImageRef, smokeImageRef]} />
     </div>
   );
 }

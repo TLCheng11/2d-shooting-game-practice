@@ -1,5 +1,9 @@
 import { RefObject } from "react";
 
+export interface IGameEffectsPorp {
+  effectsRef: RefObject<HTMLImageElement>[];
+}
+
 export interface IGameEnemiesPorp {
   enemiesRef: RefObject<HTMLImageElement>[];
 }

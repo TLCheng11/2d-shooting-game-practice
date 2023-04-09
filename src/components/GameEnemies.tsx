@@ -42,12 +42,6 @@ function GameEnemies({ enemiesRef }: IGameEnemiesPorp) {
         src="./assets/enemies/drone.png"
         alt="drone"
       />
-      <img
-        id="gears"
-        ref={gearsImageRef}
-        src="./assets/enemies/gears.png"
-        alt="gears"
-      />
     </>
   );
 }

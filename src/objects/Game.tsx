@@ -10,7 +10,7 @@ import {
   IUI,
 } from "../types/objectsInterfaces";
 import Background from "./Background";
-import { Angler1, Angler2, HiveWhale, Lucky } from "./Enemy";
+import { Angler1, Angler2, Drone, HiveWhale, Lucky } from "./Enemy";
 import InputHandler from "./InputHandler";
 import Player from "./Player";
 import UI from "./UI";
@@ -136,6 +136,15 @@ export default class Game implements IGame {
               this.score += enemy.score;
               if (this.score >= this.winningScore) {
                 this.isGameOver = true;
+              }
+              if (enemy.type === "hiveWhale") {
+                for (let i = 0; i < 5; i++) {
+                  let x = Math.random() * enemy.width * 0.8 + enemy.x;
+                  let y = Math.random() * enemy.width * 0.6 + enemy.y;
+                  this.enemies.push(
+                    new Drone(this, this.enemiesImageRef[4], x, y)
+                  );
+                }
               }
             }
             projectile.markedForDeletion = true;

@@ -137,11 +137,11 @@ export class Drone extends Enemy {
     y: number
   ) {
     super(game, imageRef);
-    this.width = 400;
-    this.height = 227;
+    this.width = 115;
+    this.height = 95;
     this.x = x;
     this.y = y;
-    this.speedX = Math.random() * -3 - 0.8;
+    this.speedX = Math.random() * -4 - 1.2;
     this.lives = 2;
     this.score = this.lives;
     this.frameX = 0;

@@ -5,7 +5,6 @@ function GameEnemies({ enemiesRef }: IGameEnemiesPorp) {
     angler1ImageRef,
     angler2ImageRef,
     luckyImageRef,
-    gearsImageRef,
     hiveWhaleImageRef,
     droneImageRef,
   ] = enemiesRef;

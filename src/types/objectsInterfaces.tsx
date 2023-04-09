@@ -34,6 +34,23 @@ export interface IEnemy {
   draw(context: CanvasRenderingContext2D): void;
 }
 
+export interface IExplosion {
+  game: IGame;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  image: HTMLImageElement | null;
+  frameX: number;
+  maxFrame: number;
+  fps: number;
+  timer: number;
+  interval: number;
+  markedForDeletion: boolean;
+  update(deltaTime: number): void;
+  draw(context: CanvasRenderingContext2D): void;
+}
+
 export interface IGame {
   isGameOver: boolean;
   debug: boolean;

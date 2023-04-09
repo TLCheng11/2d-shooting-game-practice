@@ -22,14 +22,14 @@ export default class Explosion implements IExplosion {
     imageRef: RefObject<HTMLImageElement>
   ) {
     this.game = game;
-    this.x = x;
-    this.y = y;
     this.width = 200;
     this.height = 200;
+    this.x = x - this.width * 0.5;
+    this.y = y - this.height * 0.5;
     this.image = imageRef.current;
     this.frameX = 0;
-    this.maxFrame = 7;
-    this.fps = 15;
+    this.maxFrame = 8;
+    this.fps = 5;
     this.timer = 0;
     this.interval = 1000 / this.fps;
     this.markedForDeletion = false;
@@ -42,6 +42,9 @@ export default class Explosion implements IExplosion {
       this.timer = 0;
       this.frameX++;
     }
+    if (this.frameX > this.maxFrame) {
+      this.markedForDeletion = true;
+    }
   }
 
   draw(context: CanvasRenderingContext2D): void {
@@ -49,10 +52,10 @@ export default class Explosion implements IExplosion {
       context.drawImage(
         this.image,
         this.frameX * this.width,
-        this.height,
+        0,
         this.width,
         this.height,
-        this.x,
+        this.x - this.game.speed,
         this.y,
         this.width,
         this.height

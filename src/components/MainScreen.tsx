@@ -61,7 +61,7 @@ function MainScreen() {
             hiveWhaleImageRef,
             droneImageRef,
           ],
-          [gearsImageRef]
+          [gearsImageRef, fireImageRef, smokeImageRef]
         )
       );
     }

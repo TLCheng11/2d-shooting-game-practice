@@ -66,7 +66,8 @@ export interface IGame {
   enemyInterval: number;
   enemiesImageRef: RefObject<HTMLImageElement>[];
   gears: IGears[];
-  gearsImageRef: RefObject<HTMLImageElement>;
+  explosions: IExplosion[];
+  effectsImageRef: RefObject<HTMLImageElement>[];
   score: number;
   winningScore: number;
   gameTime: number;
@@ -76,6 +77,8 @@ export interface IGame {
   draw(context: CanvasRenderingContext2D): void;
   addEnemy(deltaTime: number): void;
   checkCollision(rect1: IPlayer | IProjectile, rect2: IEnemy): boolean;
+  addGear(x: number, y: number, pieces: number): void;
+  addExplosion(x: number, y: number): void;
 }
 
 export interface IGears {

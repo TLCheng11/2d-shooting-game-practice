@@ -108,7 +108,7 @@ export default class Game implements IGame {
           this.addGear(
             enemy.x + enemy.width * 0.5,
             enemy.y + enemy.height * 0.5,
-            10
+            enemy.score
           );
           if (enemy.type === "lucky") {
             this.player.enterPowerUp();
@@ -131,7 +131,7 @@ export default class Game implements IGame {
               this.addGear(
                 enemy.x + enemy.width * 0.5,
                 enemy.y + enemy.height * 0.5,
-                10
+                enemy.score
               );
               this.score += enemy.score;
               if (this.score >= this.winningScore) {
